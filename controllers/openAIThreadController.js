@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-    apiKey: "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"
+    apiKey: "Enter Key"
 });
 
 const assistantID = "asst_3qhGMHy1RWb9jGSMeGT21rJq";
