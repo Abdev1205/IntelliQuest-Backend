@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 mongoose.set('strictQuery', false);
-const connectDb = (uri) => {
+const connectDb = async (uri) => {
   return mongoose.connect(uri, {
   }).then(() => {
     console.log('Connected to Database Successfully');
@@ -9,4 +9,4 @@ const connectDb = (uri) => {
   })
 }
 
-module.exports = connectDb;
+export default connectDb;
