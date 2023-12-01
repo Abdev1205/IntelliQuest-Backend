@@ -1,8 +1,11 @@
-const express = require("express");
+import express from "express";
+import  {testApi} from  "../controllers/testingControllers.js"
+import  {callAssistant}  from "../controllers/openAIThreadController.js"
+
 const router = express.Router();
-const { testApi } = require("../controllers/testingControllers")
 
 // Route for testing the API
 router.get('/testing', testApi);
+router.get('/callAssistant', callAssistant);
 
-module.exports = router; 
+export default router;
