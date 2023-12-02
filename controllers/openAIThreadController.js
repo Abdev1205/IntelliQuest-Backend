@@ -1,24 +1,30 @@
 import OpenAI from "openai";
-
-const openai = new OpenAI({
-    apiKey: "Enter Key"
+import { config } from "dotenv";
+config({
+    path: ".env"
 });
 
-const assistantID = "asst_3qhGMHy1RWb9jGSMeGT21rJq";
+const openai = new OpenAI({
+    apiKey: process.env.OPEN_AI_KEY
+});
+
+
+
+const assistantID = process.env.OPEN_AI_ASSISTANT_ID;
 
 const checkStatus = async (threadID, runID) => {
     const runs = await openai.beta.threads.runs.retrieve(
-    threadID,
-    runID,
+        threadID,
+        runID,
     );
     return runs.status;
 };
 
 const waitForCompletion = async (runStatus, runID, threadID) => {
     while (runStatus !== "completed") {
-      console.log("Sleeping for 1s");
-      await sleep(1000);
-      runStatus = await checkStatus(threadID, runID);
+        console.log("Sleeping for 1s");
+        await sleep(1000);
+        runStatus = await checkStatus(threadID, runID);
     }
 };
 
@@ -43,10 +49,10 @@ export const callAssistant = async (req, res) => {
     const messages = await openai.beta.threads.messages.list(
         thread.id
     )
-    
+
     // send op in json
     res.status(200).send({
         success: true,
-        assistant : JSON.parse(messages.body.data[0].content[0].text.value)
+        assistant: JSON.parse(messages.body.data[0].content[0].text.value)
     })
 }
