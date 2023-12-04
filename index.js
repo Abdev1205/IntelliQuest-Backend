@@ -1,4 +1,4 @@
-import {config} from "dotenv";
+import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -22,7 +22,7 @@ app.use('/api', routes);
 
 
 config({
-  path: "./.env"
+  path: ".env"
 });
 
 const PORT = process.env.PORT || 4000;
