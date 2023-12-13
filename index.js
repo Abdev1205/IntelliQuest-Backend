@@ -8,10 +8,9 @@ import connectDb from "./Db/connect.js";
 const app = express();
 
 // adding middleware
-app.use(cors());
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -20,6 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', routes);
 
+console.log(process.env.FRONTEND_URL)
 
 config({
   path: ".env"
